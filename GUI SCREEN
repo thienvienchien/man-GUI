@@ -1,0 +1,37 @@
+--[[ 
+    Deal Rail GUI (v1.0)
+    Tác giả: TênCủaBạn
+    Màn hình GUI xám, vừa phải, có hiển thị tên tác giả trong 2 giây
+--]]
+
+-- Tạo ScreenGui
+local gui = Instance.new("ScreenGui")
+gui.Name = "DealRailGUI"
+gui.Parent = game.CoreGui
+
+-- Tạo khung chính
+local frame = Instance.new("Frame")
+frame.Name = "MainFrame"
+frame.Size = UDim2.new(0, 300, 0, 200)
+frame.Position = UDim2.new(0.5, -150, 0.5, -100)
+frame.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- Màu xám
+frame.BorderSizePixel = 0
+frame.Parent = gui
+
+-- Tạo label hiển thị tên tác giả
+local authorLabel = Instance.new("TextLabel")
+authorLabel.Size = UDim2.new(1, 0, 0, 30)
+authorLabel.Position = UDim2.new(0, 0, 0, -35)
+authorLabel.BackgroundTransparency = 1
+authorLabel.Text = "Script by KUNI-3aeSadThur"
+authorLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+authorLabel.Font = Enum.Font.SourceSansBold
+authorLabel.TextScaled = true
+authorLabel.Parent = frame
+
+-- Tự động ẩn sau 2 giây
+task.delay(2, function()
+    if authorLabel then
+        authorLabel:Destroy()
+    end
+end)
