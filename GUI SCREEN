@@ -1,37 +1,55 @@
---[[ 
-    Deal Rail GUI (v1.0)
-    Tác giả: TênCủaBạn
-    Màn hình GUI xám, vừa phải, có hiển thị tên tác giả trong 2 giây
+--[[
+    Deal Rail GUI v1.0
+    Author: TenCuaBan
+    Script được tối ưu cho executor (KRNL, Fluxus, Delta, ...)
 --]]
 
--- Tạo ScreenGui
+-- Xóa GUI cũ nếu có
+pcall(function() game.CoreGui:FindFirstChild("DealRailGUI"):Destroy() end)
+
+-- Tạo GUI chính
 local gui = Instance.new("ScreenGui")
 gui.Name = "DealRailGUI"
-gui.Parent = game.CoreGui
+gui.Parent = game:GetService("CoreGui")
 
--- Tạo khung chính
+-- Khung chính
 local frame = Instance.new("Frame")
 frame.Name = "MainFrame"
 frame.Size = UDim2.new(0, 300, 0, 200)
 frame.Position = UDim2.new(0.5, -150, 0.5, -100)
-frame.BackgroundColor3 = Color3.fromRGB(100, 100, 100) -- Màu xám
+frame.BackgroundColor3 = Color3.fromRGB(100, 100, 100)
 frame.BorderSizePixel = 0
 frame.Parent = gui
 
--- Tạo label hiển thị tên tác giả
-local authorLabel = Instance.new("TextLabel")
-authorLabel.Size = UDim2.new(1, 0, 0, 30)
-authorLabel.Position = UDim2.new(0, 0, 0, -35)
-authorLabel.BackgroundTransparency = 1
-authorLabel.Text = "Script by KUNI-3aeSadThur"
-authorLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-authorLabel.Font = Enum.Font.SourceSansBold
-authorLabel.TextScaled = true
-authorLabel.Parent = frame
+-- Tên tác giả hiển thị 2 giây
+local author = Instance.new("TextLabel")
+author.Size = UDim2.new(1, 0, 0, 25)
+author.Position = UDim2.new(0, 0, 0, -30)
+author.BackgroundTransparency = 1
+author.Text = "BY KUNIGAMI"
+author.Font = Enum.Font.SourceSansBold
+author.TextColor3 = Color3.fromRGB(255, 255, 255)
+author.TextScaled = true
+author.Parent = frame
 
--- Tự động ẩn sau 2 giây
+-- Tự động ẩn tác giả
 task.delay(2, function()
-    if authorLabel then
-        authorLabel:Destroy()
-    end
+    if author then author:Destroy() end
+end)
+
+-- Nút mẫu: "Kích hoạt Deal Rail"
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0, 200, 0, 50)
+button.Position = UDim2.new(0.5, -100, 0.5, -25)
+button.BackgroundColor3 = Color3.fromRGB(80, 80, 80)
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.Font = Enum.Font.SourceSansBold
+button.Text = "Kích hoạt Deal Rail"
+button.TextScaled = true
+button.Parent = frame
+
+-- Hành động khi click (mặc định là in ra console)
+button.MouseButton1Click:Connect(function()
+    print("[Deal Rail] Đã nhấn nút kích hoạt!")
+    -- Tại đây sau này mình sẽ thêm các tính năng bạn yêu cầu
 end)
